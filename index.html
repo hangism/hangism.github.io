@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="http://www.softwhy.com/" />
+<title>幸运大抽奖</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+}
+  
+.title{
+  width:400px;
+  height:70px;
+  margin:0 auto;
+  padding-top:30px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  color:#F00;
+}
+  
+.btns{
+  width:190px;
+  height:30px;
+  margin:0 auto;
+}
+  
+.btns span{
+  display:block;
+  float:left;
+  width:80px;
+  height:27px;
+  line-height:27px;
+  background:#036;
+  border:1px solid #eee;
+  border-radius:7px;
+  margin-right:10px;
+  color:#FFF;
+  text-align:center;
+  font-size:14px;
+  cursor:pointer;
+}
+</style>
+<script>
+var data=['鲍荣雪','张丹','唐如鑫','陆庭方','任泰熹','袁斐','张盈盈', '王红艳', '黄冉冉', '吴丽萍', '张涛', '张超', '王宇彤', '杜先红', '陈俊志', '甘航', '余茂华'],
+    timer=null;
+  
+window.onload=function(){
+  var Title=document.getElementById('title'),
+      Play=document.getElementById('play'),
+      Stop=document.getElementById('stop'),
+      flag=0;
+  
+  Play.onclick=playfun; 
+  Stop.onclick=stopfun; 
+  
+  // ������ʼ
+  document.onkeyup=function(event){
+    event=event || window.event;
+    if(event.keyCode==13){
+      if(flag==0){
+        playfun();
+        flag=1;
+      }else{
+        stopfun();
+        flag=0;
+      }
+    }
+  }
+}
+  
+function playfun(){
+  var Title=document.getElementById('title'),
+      Play=document.getElementById('play');
+  clearInterval(timer);
+  timer=setInterval(function(){
+      var random=Math.floor(Math.random()*data.length);
+      Title.innerHTML=data[random];
+  },50)
+  Play.style.background='#999';
+}
+  
+function stopfun(){
+  var Play=document.getElementById('play');
+  clearInterval(timer);
+  Play.style.background='#036';
+}
+</script>
+</head>
+ <body>
+    <div id="title" class="title">幸运大抽奖</div>
+    <div class="btns">
+       <span id="play">开始</span>
+       <span id="stop">停止</span>
+    </div>
+ </body>
+</html>
